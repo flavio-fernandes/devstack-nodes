@@ -2,9 +2,9 @@ vcsrepo {'/home/vagrant/devstack':
     ensure   => present,
     provider => git,
     user     => 'vagrant',
-    # source   => 'https://github.com/openstack-dev/devstack.git',
-    source   => 'https://github.com/flavio-fernandes/devstack.git',
-    revision => 'odlDevel',
+    source   => 'https://github.com/openstack-dev/devstack.git',
+    # source   => 'https://github.com/flavio-fernandes/devstack.git',
+    # revision => 'odlDevel',
     before   => File['/home/vagrant/devstack/local.conf'],
 }
 
