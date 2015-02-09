@@ -14,20 +14,15 @@ To use these drivers with Devstack....
 1) Edit your local.conf. Key sections to modify are::
 
     [[local|localrc]] LOGFILE=stack.sh.log
-    enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl odlDevel
+    enable_plugin networking-odl https://github.com/stackforge/networking-odl
 
     Q_PLUGIN=ml2
-    Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
     Q_ML2_TENANT_NETWORK_TYPE=vxlan
     ODL_MGR_IP=${ODL_IP}
     ENABLE_TENANT_TUNNELS=True
     Q_ML2_TENANT_NETWORK_TYPE=vxlan
 
-    enable_service odl-server odl-compute
-
-    [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
-    [agent]
-    minimize_polling=True
+    ODL_MODE=allinone
 
 2) Start devstack::
 
