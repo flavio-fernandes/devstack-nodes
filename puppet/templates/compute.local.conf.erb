@@ -11,9 +11,6 @@ RECLONE=yes
 
 disable_all_services
 enable_service nova n-cpu quantum n-novnc rabbit
-enable_service odl-compute
-# qpid
-# enable_service neutron
 
 HOST_IP=<%= @hosts[@hostname]['ipaddress'] %>
 HOST_NAME=<%= @hosts[@hostname]['name'] %>
@@ -32,14 +29,19 @@ VNCSERVER_LISTEN=0.0.0.0
 #EXTRA_OPTS=(scheduler_default_filters=AllHostsFilter)
 
 Q_PLUGIN=ml2
-Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight
-#Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
 ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ENABLE_TENANT_TUNNELS=True
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
 #Q_ML2_L3_PLUGIN=odldrivers.l3.l3_odl.OpenDaylightL3RouterPlugin
 #Q_SERVICE_PLUGIN_CLASSES=firewall,lbaas
+
+ODL_MODE=compute
+# Note: the commented out settings below are taken care due to
+# ODL_MODE (devstack/settings)
+#Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
+#enable_service odl-compute
+#disable_service q-agt
 
 # NOTE: Set the database type
 DATABASE_TYPE=mysql

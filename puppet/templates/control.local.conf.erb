@@ -29,20 +29,24 @@ SERVICE_HOST=$HOST_IP
 SERVICE_HOST_NAME=$HOST_NAME
 
 Q_PLUGIN=ml2
-Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
 #Q_ML2_L3_PLUGIN=odl-router
 #Q_SERVICE_PLUGIN_CLASSES=firewall,lbaas
 
+ODL_MODE=externalodl
+# Note: the commented out settings below are taken care due to
+# ODL_MODE (devstack/settings)
+#Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
 #enable_service odl-server odl-compute
-enable_service odl-neutron odl-compute
+#enable_service odl-neutron odl-compute
+#disable_service q-agt
 
+ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 #ODL_ARGS="-Xmx1024m -XX:MaxPermSize=512m"
 #ODL_BOOT_WAIT=70
 #ODL_ENDPOINT=http://${ODL_MGR_IP}:8080/controller/nb/v2/neutron
 
-disable_service q-agt
 ENABLE_TENANT_TUNNELS=True
 
 # The below pull gerrit patches
