@@ -4,8 +4,6 @@ devstack-nodes
 This repo provides a Vagrantfile with provisioning that one can use to easily
 get a cluster of nodes configured with DevStack.
 
-**More info on using repository will be available in the near future.**
-
 Usage
 -----
 
@@ -40,4 +38,4 @@ First, run the ODL Controller on your local machine, then::
 If you would like more than one compute node, you can set the following environment variable::
 
     #Note: Only 3 or less nodes are supported today
-    DEVSTACK_NUM_COMPUTE_NODES=3
+    export DEVSTACK_NUM_COMPUTE_NODES=3
