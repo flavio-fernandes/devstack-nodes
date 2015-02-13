@@ -60,3 +60,12 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+# Uncomment the lines below if odl is being configured to perform l3fwd
+# ODL_L3=True
+# Q_ML2_L3_PLUGIN=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
+## For L3
+# [[post-config]|/etc/neutron/l3_agent.ini]]
+# [DEFAULT]
+# interface_driver = neutron.agent.linux.interface.NullDriver
+

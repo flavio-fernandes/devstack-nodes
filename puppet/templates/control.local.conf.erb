@@ -30,7 +30,6 @@ SERVICE_HOST_NAME=$HOST_NAME
 
 Q_PLUGIN=ml2
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
-#Q_ML2_L3_PLUGIN=odl-router
 #Q_SERVICE_PLUGIN_CLASSES=firewall,lbaas
 
 ODL_MODE=externalodl
@@ -77,11 +76,15 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
+# Uncomment the lines below if odl is being configured to perform l3fwd
+# ODL_L3=True
+# Q_ML2_L3_PLUGIN=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
+## For L3
+# [[post-config]|/etc/neutron/l3_agent.ini]]
+# [DEFAULT]
+# interface_driver = neutron.agent.linux.interface.NullDriver
+
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
 minimize_polling=True
 
-# ## For L3
-# [[post-config]|/etc/neutron/l3_agent.ini]]
-# [DEFAULT]
-# interface_driver = neutron.agent.linux.interface.NullDriver
