@@ -1,12 +1,10 @@
 [[local|localrc]]
 enable_plugin networking-odl https://github.com/stackforge/networking-odl
-#enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl odlDevel
 
 LOGFILE=stack.sh.log
 LOG_COLOR=False
 SCREEN_LOGDIR=/opt/stack/data/log
-#OFFLINE=true
+#OFFLINE=True
 RECLONE=yes
 
 disable_all_services
@@ -20,29 +18,13 @@ SERVICE_HOST_NAME=<%= @hosts['devstack-control']['name'] %>
 VNCSERVER_PROXYCLIENT_ADDRESS=$HOST_IP
 VNCSERVER_LISTEN=0.0.0.0
 
-#FLOATING_RANGE=192.168.50.0/24
-
-# NOTE: Set these to pull patches from gerrit
-#NEUTRON_REPO=https://github.com/CiscoSystems/neutron.git
-#NEUTRON_BRANCH=odl_ml2
-
-#EXTRA_OPTS=(scheduler_default_filters=AllHostsFilter)
-
 Q_PLUGIN=ml2
+ODL_MODE=compute
 ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 ENABLE_TENANT_TUNNELS=True
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
-#Q_ML2_L3_PLUGIN=odldrivers.l3.l3_odl.OpenDaylightL3RouterPlugin
-#Q_SERVICE_PLUGIN_CLASSES=firewall,lbaas
-
-ODL_MODE=compute
-# Note: the commented out settings below are taken care due to
-# ODL_MODE (devstack/settings)
-#Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
-#enable_service odl-compute
-#disable_service q-agt
 
 # NOTE: Set the database type
 DATABASE_TYPE=mysql
@@ -62,7 +44,12 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-# Uncomment the lines below if odl is being configured to perform l3fwd
+## To enable support for OpenDaylight with LBaaS V2, add this:
+# enable_plugin neutron-lbaas http://git.openstack.org/openstack/neutron-lbaas
+# enable_service q-lbaasv2
+# NEUTRON_LBAAS_SERVICE_PROVIDERV2="LOADBALANCERV2:opendaylight:networking_odl.lbaas.driver_v2.OpenDaylightLbaasDriverV2:default"
+
+## Uncomment the lines below if odl is being configured to perform l3fwd
 # ODL_L3=True
 # Q_ML2_L3_PLUGIN=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 ## For L3

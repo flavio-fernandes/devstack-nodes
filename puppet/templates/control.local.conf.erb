@@ -78,7 +78,12 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-# Uncomment the lines below if odl is being configured to perform l3fwd
+## To enable support for OpenDaylight with LBaaS V2, add this:
+# enable_plugin neutron-lbaas http://git.openstack.org/openstack/neutron-lbaas
+# enable_service q-lbaasv2
+# NEUTRON_LBAAS_SERVICE_PROVIDERV2="LOADBALANCERV2:opendaylight:networking_odl.lbaas.driver_v2.OpenDaylightLbaasDriverV2:default"
+
+## Uncomment the lines below if odl is being configured to perform l3fwd
 # ODL_L3=True
 # Q_ML2_L3_PLUGIN=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 ## For L3
