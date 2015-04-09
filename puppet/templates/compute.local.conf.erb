@@ -57,3 +57,7 @@ ADMIN_PASSWORD=admin
 # [DEFAULT]
 # interface_driver = neutron.agent.linux.interface.NullDriver
 
+
+[[post-config|$NOVA_CONF]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0

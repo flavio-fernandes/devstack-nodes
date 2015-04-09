@@ -95,3 +95,16 @@ ADMIN_PASSWORD=admin
 [agent]
 minimize_polling=True
 
+
+[[post-config|$NOVA_CONF]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0
+[[post-config|$CINDER_CONF]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0
+[[post-config|$NEUTRON_CONF]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0
+[[post-config|$GLANCE_CONF_DIR/glance-api.conf]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0
