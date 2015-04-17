@@ -78,7 +78,9 @@ $deps = [
     'tcpdump',
     'unzip',
     'vlan',
-    'wget'
+    'wget',
+    'xbase-clients',
+    'wireshark'
 ]
 
 $hosts = hiera('hosts')
