@@ -14,11 +14,11 @@ disable_service cinder
 disable_service n-net
 enable_service q-svc
 enable_service q-dhcp
-enable_service q-l3
 enable_service q-meta
 enable_service q-vpn
 #enable_service q-metering
 enable_service q-lbaas
+#enable_service q-lbaasv2
 enable_service q-fwaas
 enable_service neutron
 enable_service tempest
@@ -31,32 +31,17 @@ SERVICE_HOST_NAME=$HOST_NAME
 NEUTRON_CREATE_INITIAL_NETWORKS=False
 Q_PLUGIN=ml2
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
-#Q_SERVICE_PLUGIN_CLASSES=firewall,lbaas
 
+# https://github.com/stackforge/networking-odl/blob/master/devstack/settings
 ODL_MODE=externalodl
-# Note: the commented out settings below are taken care due to
-# ODL_MODE (devstack/settings)
-#Q_ML2_PLUGIN_MECHANISM_DRIVERS=opendaylight,logger
-#enable_service odl-server odl-compute
-#enable_service odl-neutron odl-compute
-#disable_service q-agt
 
 ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 #ODL_ARGS="-Xmx1024m -XX:MaxPermSize=512m"
 #ODL_BOOT_WAIT=70
-#ODL_ENDPOINT=http://${ODL_MGR_IP}:8080/controller/nb/v2/neutron
 
 ENABLE_TENANT_TUNNELS=True
-
-# The below pull gerrit patches
-#NEUTRON_REPO=https://github.com/CiscoSystems/neutron.git
-#NEUTRON_BRANCH=bp/ml2-opendaylight-mechanism-driver
-
-# The below is needed on Fedora/CentOS
-#disable_service rabbit
-#enable_service qpid
 
 VNCSERVER_PROXYCLIENT_ADDRESS=${HOST_IP}
 VNCSERVER_LISTEN=0.0.0.0
@@ -73,23 +58,19 @@ KEYSTONE_SERVICE_HOST=$SERVICE_HOST
 
 MYSQL_PASSWORD=mysql
 RABBIT_PASSWORD=rabbit
-#QPID_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-## To enable support for OpenDaylight with LBaaS V2, add this:
-# enable_plugin neutron-lbaas http://git.openstack.org/openstack/neutron-lbaas
-# enable_service q-lbaasv2
-# NEUTRON_LBAAS_SERVICE_PROVIDERV2="LOADBALANCERV2:opendaylight:networking_odl.lbaas.driver_v2.OpenDaylightLbaasDriverV2:default"
-
-## Uncomment the lines below if odl is being configured to perform l3fwd
+# Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
+# For more info:  https://github.com/stackforge/networking-odl/blob/master/devstack/README.rst
+enable_service q-l3
+# disable_service q-l3
+# Q_L3_ENABLED=True
 # ODL_L3=True
-# Q_ML2_L3_PLUGIN=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
-## For L3
-# [[post-config]|/etc/neutron/l3_agent.ini]]
+# [[post-config|$NEUTRON_CONF]]
 # [DEFAULT]
-# interface_driver = neutron.agent.linux.interface.NullDriver
+# service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
