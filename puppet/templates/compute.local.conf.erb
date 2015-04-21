@@ -1,6 +1,4 @@
 [[local|localrc]]
-enable_plugin networking-odl https://github.com/stackforge/networking-odl
-
 LOGFILE=stack.sh.log
 LOG_COLOR=False
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -19,10 +17,6 @@ VNCSERVER_PROXYCLIENT_ADDRESS=$HOST_IP
 VNCSERVER_LISTEN=0.0.0.0
 
 Q_PLUGIN=ml2
-ODL_MODE=compute
-ODL_NETVIRT_DEBUG_LOGS=True
-ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
-ODL_PORT=8080
 ENABLE_TENANT_TUNNELS=True
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
 
@@ -39,10 +33,13 @@ KEYSTONE_SERVICE_HOST=$SERVICE_HOST
 
 MYSQL_PASSWORD=mysql
 RABBIT_PASSWORD=rabbit
-#QPID_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+enable_plugin networking-odl https://github.com/stackforge/networking-odl
+ODL_MODE=compute
+ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 
 [[post-config|$NOVA_CONF]]
 [oslo_messaging_rabbit]

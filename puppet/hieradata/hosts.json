@@ -2,7 +2,7 @@
   "hosts": {
     "opendaylight": {
       "name": "opendaylight",
-      "ipaddress": "192.168.50.1"
+      "ipaddress": "192.168.50.20"
     },
     "devstack-control": {
       "name": "devstack-control",
