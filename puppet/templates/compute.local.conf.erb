@@ -39,6 +39,9 @@ ADMIN_PASSWORD=admin
 
 enable_plugin networking-odl https://github.com/stackforge/networking-odl
 ODL_MODE=compute
+
+# If using ODL inside devstack-control, replace ODL_MGR_IP
+# ODL_MGR_IP=<%= @hosts['devstack-control']['ipaddress'] %>
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 
 [[post-config|$NOVA_CONF]]

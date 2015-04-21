@@ -51,8 +51,13 @@ ADMIN_PASSWORD=admin
 
 enable_plugin networking-odl https://github.com/stackforge/networking-odl
 #ODL_NETVIRT_DEBUG_LOGS=True
-ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
+
+# If using ODL inside devstack-control, replace ODL_MODE and ODL_MGR_IP
+# ODL_MODE=allinone
+# ODL_MGR_IP=<%= @hosts['devstack-control']['ipaddress'] %>
+ODL_MODE=externalodl
+ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 
 # Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
 # For more info:  https://github.com/stackforge/networking-odl/blob/master/devstack/README.rst
