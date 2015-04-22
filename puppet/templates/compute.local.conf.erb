@@ -40,7 +40,6 @@ ADMIN_PASSWORD=admin
 enable_plugin networking-odl https://github.com/stackforge/networking-odl
 ODL_MODE=compute
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
-ODL_BOOT_WAIT=123
 
 [[post-config|$NOVA_CONF]]
 [oslo_messaging_rabbit]
