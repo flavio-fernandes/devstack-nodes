@@ -2,6 +2,7 @@
 #
 
 TNT_ID=${TNT_ID:-1}
+VM_COUNT=${VM_COUNT:-2}
 
 cd /home/vagrant/devstack
 
@@ -26,9 +27,10 @@ neutron subnet-create --gateway=2.0.0.254 --name=subint int 2.0.0.0/24 --enable-
 IMAGE=$(nova image-list | grep 'cirros.*uec\s' | awk '{print $2}')
 NETID=$(neutron net-list | grep -w int | awk '{print $2}')
     
-for VMNAME in vm1 vm2 ; do \
+for x in `seq 1 ${VM_COUNT}` ; do \
+    VMNAME="vm${x}"
     echo creating ${TNT_ID}_${VMNAME}
-	nova boot --poll --flavor m1.nano --image ${IMAGE} --nic net-id=${NETID} \
+    nova boot --poll --flavor m1.nano --image ${IMAGE} --nic net-id=${NETID} \
     --security-groups sec1 --key-name demo_key \
     ${TNT_ID}_${VMNAME}
     sleep 5
