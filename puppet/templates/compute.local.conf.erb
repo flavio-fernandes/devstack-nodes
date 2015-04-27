@@ -43,3 +43,7 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+[[post-config|$NOVA_CONF]]
+[oslo_messaging_rabbit]
+heartbeat_timeout_threshold = 0
