@@ -75,17 +75,3 @@ enable_service q-l3
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
 minimize_polling=True
-
-
-[[post-config|$NOVA_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$CINDER_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$NEUTRON_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$GLANCE_API_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
