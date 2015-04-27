@@ -37,7 +37,8 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-enable_plugin networking-odl https://github.com/stackforge/networking-odl
+## enable_plugin networking-odl https://github.com/stackforge/networking-odl
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl basicL3
 ODL_MODE=compute
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 

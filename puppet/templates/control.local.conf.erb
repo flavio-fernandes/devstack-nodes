@@ -49,7 +49,8 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-enable_plugin networking-odl https://github.com/stackforge/networking-odl
+## enable_plugin networking-odl https://github.com/stackforge/networking-odl
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl basicL3
 #ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
