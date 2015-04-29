@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
 
-TNT_ID=${TNT_ID:-1}
-SUBNETS_PER_TENANT=${SUBNETS_PER_TENANT:-2}
-VMS_PER_SUBNET=${VMS_PER_SUBNET:-2}
+export TNT_ID=${TNT_ID:-1}
+export SUBNETS_PER_TENANT=${SUBNETS_PER_TENANT:-2}
+export VMS_PER_SUBNET=${VMS_PER_SUBNET:-2}
 
 cd /home/vagrant/devstack
 

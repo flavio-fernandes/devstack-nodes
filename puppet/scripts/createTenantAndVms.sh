@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 
-TNT_ID=${TNT_ID:-1}
-VM_COUNT=${VM_COUNT:-2}
+export TNT_ID=${TNT_ID:-1}
+export VM_COUNT=${VM_COUNT:-2}
 
 cd /home/vagrant/devstack
 
