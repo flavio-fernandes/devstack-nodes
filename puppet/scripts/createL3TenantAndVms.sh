@@ -47,9 +47,9 @@ for netIndex in `seq 1 ${SUBNETS_PER_TENANT}` ; do \
 done
 
 #
-# source openrc user1 tenant1 ; export OS_PASSWORD=user1
-# source openrc user2 tenant2 ; export OS_PASSWORD=user2
-# source openrc user${TNT_ID} tenant${TNT_ID} ; export OS_PASSWORD=user${TNT_ID}
+# source openrc l3user1 l3tenant1 ; export OS_PASSWORD=l3user1
+# source openrc l3user2 l3tenant2 ; export OS_PASSWORD=l3user2
+# source openrc l3user${TNT_ID} l3tenant${TNT_ID} ; export OS_PASSWORD=l3user${TNT_ID}
 # source openrc admin admin
 #
 
