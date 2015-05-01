@@ -56,6 +56,16 @@ ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 ODL_BOOT_WAIT=123
 
+# Use special version of opendaylight. Comment these lines out of you would like to
+# use Helium-SR3 instead, but be mindful of bug 3005. More info on gerrit
+# https://git.opendaylight.org/gerrit/#/c/19409/
+# https://bugs.opendaylight.org/show_bug.cgi?id=3005
+#
+ODL_RELEASE=helium
+ODL_NAME="distribution-karaf-0.2.4-SNAPSHOT"
+ODL_PKG="distribution-karaf-0.2.4-SNAPSHOT.zip"
+ODL_URL="https://objects.dreamhost.com:443/flaviof/flaviof.com"
+
 # If using ODL outside devstack-control, replace ODL_MODE
 # ODL_MODE=externalodl
 
