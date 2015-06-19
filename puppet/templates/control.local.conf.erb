@@ -1,7 +1,7 @@
 [[local|localrc]]
-enable_plugin networking-odl https://github.com/stackforge/networking-odl
+#enable_plugin networking-odl https://github.com/stackforge/networking-odl
 #enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl odlDevel
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl l3devel
 
 LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -12,15 +12,12 @@ RECLONE=yes
 disable_service swift
 disable_service cinder
 disable_service n-net
+disable_service q-vpn
 enable_service q-svc
 enable_service q-dhcp
 enable_service q-meta
-disable_service q-vpn
-#enable_service q-metering
 enable_service q-lbaas
 #enable_service q-lbaasv2
-#enable_service q-fwaas
-enable_service neutron
 enable_service tempest
 
 HOST_IP=<%= @hosts['devstack-control']['ipaddress'] %>
@@ -64,28 +61,15 @@ ADMIN_PASSWORD=admin
 
 # Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
 # For more info:  https://github.com/stackforge/networking-odl/blob/master/devstack/README.rst
-enable_service q-l3
-# disable_service q-l3
-# Q_L3_ENABLED=True
-# ODL_L3=True
-# [[post-config|$NEUTRON_CONF]]
-# [DEFAULT]
-# service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
+# enable_service q-l3
+disable_service q-l3
+Q_L3_ENABLED=True
+ODL_L3=True
+PUBLIC_INTERFACE=eth2
+[[post-config|$NEUTRON_CONF]]
+[DEFAULT]
+service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
 minimize_polling=True
-
-
-[[post-config|$NOVA_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$CINDER_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$NEUTRON_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$GLANCE_API_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
