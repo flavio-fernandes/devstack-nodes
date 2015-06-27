@@ -1,7 +1,7 @@
 [[local|localrc]]
 #enable_plugin networking-odl https://github.com/stackforge/networking-odl
 #enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl l3devel
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/kilo
 
 LOGFILE=stack.sh.log
 LOG_COLOR=False
@@ -46,3 +46,16 @@ Q_L3_ENABLED=True
 ODL_L3=True
 PUBLIC_INTERFACE=eth2
 
+BRANCH=stable/kilo
+GLANCE_BRANCH=$BRANCH
+HORIZON_BRANCH=$BRANCH
+KEYSTONE_BRANCH=$BRANCH
+NOVA_BRANCH=$BRANCH
+NEUTRON_BRANCH=$BRANCH
+SWIFT_BRANCH=$BRANCH
+##CLIFF_BRANCH=$BRANCH
+##TEMPEST_BRANCH=$BRANCH
+CINDER_BRANCH=$BRANCH
+HEAT_BRANCH=$BRANCH
+TROVE_BRANCH=$BRANCH
+CEILOMETER_BRANCH=$BRANCH

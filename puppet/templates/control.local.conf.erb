@@ -1,7 +1,7 @@
 [[local|localrc]]
 #enable_plugin networking-odl https://github.com/stackforge/networking-odl
 #enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl l3devel
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/kilo
 
 LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -58,6 +58,20 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+BRANCH=stable/kilo
+GLANCE_BRANCH=$BRANCH
+HORIZON_BRANCH=$BRANCH
+KEYSTONE_BRANCH=$BRANCH
+NOVA_BRANCH=$BRANCH
+NEUTRON_BRANCH=$BRANCH
+SWIFT_BRANCH=$BRANCH
+##CLIFF_BRANCH=$BRANCH
+##TEMPEST_BRANCH=$BRANCH
+CINDER_BRANCH=$BRANCH
+HEAT_BRANCH=$BRANCH
+TROVE_BRANCH=$BRANCH
+CEILOMETER_BRANCH=$BRANCH
 
 # Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
 # For more info:  https://github.com/stackforge/networking-odl/blob/master/devstack/README.rst
