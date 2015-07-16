@@ -8,11 +8,10 @@ RECLONE=yes
 disable_service swift
 disable_service cinder
 disable_service n-net
+disable_service q-vpn
 enable_service q-svc
 enable_service q-dhcp
 enable_service q-meta
-#enable_service q-vpn
-#enable_service q-metering
 #enable_service q-lbaas
 #enable_service q-lbaasv2
 #enable_service q-fwaas
@@ -50,21 +49,25 @@ SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
 ## enable_plugin networking-odl https://github.com/stackforge/networking-odl
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl helium
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl heliumkilo
 #ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 ODL_BOOT_WAIT=123
 
-# Use special version of opendaylight. Comment these lines out of you would like to
-# use Helium-SR3 instead, but be mindful of bug 3005. More info on gerrit
-# https://git.opendaylight.org/gerrit/#/c/19409/
-# https://bugs.opendaylight.org/show_bug.cgi?id=3005
-#
-ODL_RELEASE=helium
-ODL_NAME="distribution-karaf-0.2.4-SNAPSHOT"
-ODL_PKG="distribution-karaf-0.2.4-SNAPSHOT.zip"
-ODL_URL="https://objects.dreamhost.com:443/flaviof/flaviof.com"
+BRANCH=stable/kilo
+GLANCE_BRANCH=$BRANCH
+HORIZON_BRANCH=$BRANCH
+KEYSTONE_BRANCH=$BRANCH
+NOVA_BRANCH=$BRANCH
+NEUTRON_BRANCH=$BRANCH
+SWIFT_BRANCH=$BRANCH
+##CLIFF_BRANCH=$BRANCH
+##TEMPEST_BRANCH=$BRANCH
+CINDER_BRANCH=$BRANCH
+HEAT_BRANCH=$BRANCH
+TROVE_BRANCH=$BRANCH
+CEILOMETER_BRANCH=$BRANCH
 
 # If using ODL outside devstack-control, replace ODL_MODE
 # ODL_MODE=externalodl
@@ -75,6 +78,7 @@ ODL_URL="https://objects.dreamhost.com:443/flaviof/flaviof.com"
 disable_service q-l3
 Q_L3_ENABLED=True
 ODL_L3=True
+PUBLIC_INTERFACE=eth2
 [[post-config|$NEUTRON_CONF]]
 [DEFAULT]
 service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
@@ -82,16 +86,3 @@ service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
 minimize_polling=True
-
-[[post-config|$NOVA_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$CINDER_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$NEUTRON_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
-[[post-config|$GLANCE_API_CONF]]
-[oslo_messaging_rabbit]
-heartbeat_timeout_threshold = 0
