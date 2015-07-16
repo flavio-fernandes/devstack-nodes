@@ -48,7 +48,7 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-## enable_plugin networking-odl https://github.com/stackforge/networking-odl
+## enable_plugin networking-odl https://github.com/openstack/networking-odl
 enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl heliumkilo
 #ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
@@ -73,7 +73,7 @@ CEILOMETER_BRANCH=$BRANCH
 # ODL_MODE=externalodl
 
 # Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
-# For more info:  https://github.com/stackforge/networking-odl/blob/master/devstack/README.rst
+# For more info:  https://github.com/openstack/networking-odl/blob/master/devstack/README.rst
 # enable_service q-l3
 disable_service q-l3
 Q_L3_ENABLED=True
