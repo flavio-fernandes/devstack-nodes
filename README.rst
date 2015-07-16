@@ -12,7 +12,7 @@ To use these drivers with Devstack....
 1) Edit your local.conf. Key sections to modify are::
 
     [[local|localrc]] LOGFILE=stack.sh.log
-    enable_plugin networking-odl https://github.com/stackforge/networking-odl
+    enable_plugin networking-odl https://github.com/openstack/networking-odl
 
     Q_PLUGIN=ml2
     Q_ML2_TENANT_NETWORK_TYPE=vxlan
