@@ -32,7 +32,7 @@ for netIndex in `seq 1 ${SUBNETS_PER_TENANT}` ; do \
 done
 neutron router-port-list l3tenant${TNT_ID}router
 
-IMAGE=$(nova image-list | grep 'cirros.*uec\s' | awk '{print $2}')
+IMAGE=$(nova image-list | grep 'cirros.*uec\s' | tail -1 | awk '{print $2}')
 
 for netIndex in `seq 1 ${SUBNETS_PER_TENANT}` ; do \
     NETID=$(neutron net-list | grep -w net${netIndex} | awk '{print $2}')

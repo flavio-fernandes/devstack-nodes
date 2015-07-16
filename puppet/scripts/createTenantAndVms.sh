@@ -24,7 +24,7 @@ for x in tcp udp; do nova secgroup-add-rule sec1 ${x} 1 65535 0.0.0.0/0 ; done
 neutron net-create int
 neutron subnet-create --gateway=2.0.0.254 --name=subint int 2.0.0.0/24 --enable-dhcp
 
-IMAGE=$(nova image-list | grep 'cirros.*uec\s' | awk '{print $2}')
+IMAGE=$(nova image-list | grep 'cirros.*uec\s' | tail -1 | awk '{print $2}')
 NETID=$(neutron net-list | grep -w int | awk '{print $2}')
     
 for x in `seq 1 ${VM_COUNT}` ; do \
