@@ -1,0 +1,5 @@
+## fixSql.txt
+## mysql --user=root --password="" mysql < /vagrant/puppet/scripts/fixSql.txt
+#
+UPDATE mysql.user SET Password = PASSWORD('mysql') WHERE User = 'root';
+FLUSH PRIVILEGES;

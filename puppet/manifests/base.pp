@@ -36,3 +36,23 @@ vcsrepo {'/opt/tools':
     require  => File['/opt'],
 }
 
+# Flush iptables, so stack has a clean slate
+#
+exec { 'Flush iptables':
+    command => '/sbin/iptables -F',
+    user    => 'root',
+    require => Package[$deps],
+    onlyif  => ['/usr/bin/test -f /sbin/iptables'],
+}
+exec { 'Flush iptable chain':
+    command => '/sbin/iptables -X',
+    user    => 'root',
+    require => Exec['Flush iptables'],
+    onlyif  => ['/usr/bin/test -f /sbin/iptables'],
+}
+exec { 'Save iptable':
+    command => '/usr/sbin/service iptables save',
+    user    => 'root',
+    require => Exec['Flush iptable chain'],
+    onlyif  => ['/usr/bin/test -f /sbin/iptables'],
+}
