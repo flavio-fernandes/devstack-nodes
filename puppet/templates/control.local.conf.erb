@@ -7,7 +7,6 @@ LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
 LOG_COLOR=False
 #OFFLINE=True
-#RECLONE=no
 RECLONE=yes
 
 disable_service swift
@@ -17,7 +16,7 @@ disable_service q-vpn
 enable_service q-svc
 enable_service q-dhcp
 enable_service q-meta
-enable_service q-lbaas
+#enable_service q-lbaas
 #enable_service q-lbaasv2
 enable_service tempest
 
