@@ -1,6 +1,5 @@
 [[local|localrc]]
 #enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
-#enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
 enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 
 LOGFILE=stack.sh.log
@@ -20,11 +19,8 @@ SERVICE_HOST_NAME=<%= @hosts['devstack-control']['name'] %>
 VNCSERVER_PROXYCLIENT_ADDRESS=$HOST_IP
 VNCSERVER_LISTEN=0.0.0.0
 
-Q_PLUGIN=ml2
 ODL_MODE=compute
-ODL_NETVIRT_DEBUG_LOGS=True
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
-ODL_PORT=8080
 ENABLE_TENANT_TUNNELS=True
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
 
@@ -35,7 +31,7 @@ GLANCE_HOSTPORT=$SERVICE_HOST:9292
 KEYSTONE_AUTH_HOST=$SERVICE_HOST
 KEYSTONE_SERVICE_HOST=$SERVICE_HOST
 
-MYSQL_PASSWORD=mysql
+DATABASE_PASSWORD=mysql
 RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin

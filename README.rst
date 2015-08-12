@@ -14,8 +14,6 @@ To use these drivers with Devstack....
     [[local|localrc]] LOGFILE=stack.sh.log
     enable_plugin networking-odl https://github.com/openstack/networking-odl
 
-    Q_PLUGIN=ml2
-    Q_ML2_TENANT_NETWORK_TYPE=vxlan
     ODL_MGR_IP=${ODL_IP}
     ENABLE_TENANT_TUNNELS=True
     Q_ML2_TENANT_NETWORK_TYPE=vxlan
@@ -37,5 +35,4 @@ First, run the ODL Controller on your local machine, then::
 
 If you would like more than one compute node, you can set the following environment variable::
 
-    #Note: Only 3 or less nodes are supported today
     export DEVSTACK_NUM_COMPUTE_NODES=3
