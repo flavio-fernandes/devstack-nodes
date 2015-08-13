@@ -5,7 +5,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "puppet/scripts/bootstrap.sh"
 
-  num_compute_nodes = (ENV['DEVSTACK_NUM_COMPUTE_NODES'] || 1).to_i
+  # orig: num_compute_nodes = (ENV['DEVSTACK_NUM_COMPUTE_NODES'] || 1).to_i
+  num_compute_nodes = 1
 
   # ip configuration
   control_ip = "192.168.50.20"
@@ -17,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      puppet.working_directory = "/vagrant/puppet"
      puppet.manifests_path = "puppet/manifests"
      puppet.manifest_file  = "base.pp"
-     puppet.options = "--verbose --debug"
+     # puppet.options = "--verbose --debug"
   end
 
   # Devstack Controller
@@ -49,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.working_directory = "/vagrant/puppet"
       puppet.manifests_path = "puppet/manifests"
       puppet.manifest_file  = "devstack-control.pp"
-      puppet.options = "--verbose --debug"
+      # puppet.options = "--verbose --debug"
     end
   end
 
@@ -67,7 +68,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       compute.vm.network "private_network", ip: "#{compute_ip}"
       compute.vm.network "private_network", ip: "0.0.0.0", virtualbox__intnet: "mylocalnet", auto_config: false
       compute.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "4096"]
+        vb.customize ["modifyvm", :id, "--memory", "2048"]
         vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
         vb.customize ["modifyvm", :id, "--nictype2", "virtio"]
         vb.customize ["modifyvm", :id, "--nictype3", "virtio"]
@@ -76,14 +77,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ## vb.customize ["modifyvm", :id, "--cableconnected3", "off"]
       end
       compute.vm.provider "vmware_fusion" do |vf|
-        vf.vmx["memsize"] = "4096"
+        vf.vmx["memsize"] = "2048"
       end
       compute.vm.provision "puppet" do |puppet|
         puppet.hiera_config_path = "puppet/hiera.yaml"
         puppet.working_directory = "/vagrant/puppet"
         puppet.manifests_path = "puppet/manifests"
         puppet.manifest_file  = "devstack-compute.pp"
-        puppet.options = "--verbose --debug"
+        # puppet.options = "--verbose --debug"
       end
     end
   end
