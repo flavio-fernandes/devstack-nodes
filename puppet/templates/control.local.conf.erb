@@ -29,7 +29,7 @@ Q_ML2_TENANT_NETWORK_TYPE=vxlan
 ENABLE_TENANT_TUNNELS=True
 
 # https://github.com/openstack/networking-odl/blob/master/devstack/settings
-# ODL_MODE=allinone
+# ODL_MODE=allinone  ; # allinone is the default mode. This line is here just to make that point.
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 
