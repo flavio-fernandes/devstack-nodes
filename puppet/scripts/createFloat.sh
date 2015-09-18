@@ -762,25 +762,19 @@ if [ -z "" ]; then
     check_get_code networksbad/ 404
     create_ext_net ${TNT1_ID} ${EXT_NET1_ID} 
     create_ext_subnet ${TNT1_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} 201
-    create_ext_subnet ${TNT1_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} 400
+    # create_ext_subnet ${TNT1_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} 400
     create_router ${TNT1_ID} ${TNT1_RTR_ID}
-    create_router ${TNT1_ID} ${TNT1_RTR_ID} 400
     create_port_rtr_gateway ${TNT1_ID} ${TNT1_RTR_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_GW}
-    create_port_rtr_gateway ${TNT1_ID} ${TNT1_RTR_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_GW} 400
     update_router_port_gateway ${TNT1_ID} ${TNT1_RTR_ID} ${EXT_NET1_ID} ${EXT_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_GW}
     create_tnt_net ${TNT1_ID} ${TNT1_NET1_NAME} ${TNT1_NET1_ID} ${TNT1_NET1_SEGM}
-    create_tnt_net ${TNT1_ID} ${TNT1_NET1_NAME} ${TNT1_NET1_ID} ${TNT1_NET1_SEGM} 400
     create_tnt_subnet ${TNT1_ID} ${TNT1_SUBNET1_NAME} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID}
-    create_tnt_subnet ${TNT1_ID} ${TNT1_SUBNET1_NAME} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} 400
     create_port_dhcp ${TNT1_ID} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} ${TNT1_NET1_DHCP_PORT_ID} ${TNT1_NET1_DHCP_MAC} ${TNT1_NET1_DHCP_DEVICE_ID}
     create_ovs_port create_ovs_port_for_dhcp_net1 true  ${TNT1_NET1_DHCP_OVS_PORT} ${TNT1_NET1_DHCP_MAC} ${TNT1_NET1_DHCP_PORT_ID}
     create_ovs_port create_ovs_port_for_dhcp_net1 false ${TNT1_NET1_DHCP_OVS_PORT} ${TNT1_NET1_DHCP_MAC} ${TNT1_NET1_DHCP_PORT_ID}
     update_port_dhcp ${TNT1_NET1_DHCP_PORT_ID} ${TNT1_NET1_DHCP_DEVICE_ID}
     create_port_rtr_interface ${TNT1_ID} ${TNT1_RTR_ID} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_NET1}
-    create_port_rtr_interface ${TNT1_ID} ${TNT1_RTR_ID} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_NET1} 400
     update_router_interface ${TNT1_ID} ${TNT1_RTR_ID} ${TNT1_SUBNET1_ID} ${NEUTRON_PORT_TNT1_RTR_NET1}
     create_port_vm ${TNT1_ID} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} ${TNT1_VM1_PORT_ID} ${TNT1_VM1_MAC} ${TNT1_VM1_DEVICE_ID}
-    create_port_vm ${TNT1_ID} ${TNT1_NET1_ID} ${TNT1_SUBNET1_ID} ${TNT1_VM1_PORT_ID} ${TNT1_VM1_MAC} ${TNT1_VM1_DEVICE_ID} 400
     create_ovs_port create_ovs_port_for_vm1 true  ${TNT1_NET1_VM1_OVS_PORT} ${TNT1_VM1_MAC} ${TNT1_VM1_PORT_ID} ${TNT1_VM1_VM_ID}
     create_port_floating_ip "" ${EXT_NET1_ID} ${EXT_SUBNET1_ID} ${FLOAT_IP1_PORT_ID} ${FLOAT_IP1_MAC} ${FLOAT_IP1_DEVICE_ID}
     create_floating_ip ${TNT1_ID} ${EXT_NET1_ID} ${FLOAT_IP1_ID} ${FLOAT_IP1_ADDRESS}
