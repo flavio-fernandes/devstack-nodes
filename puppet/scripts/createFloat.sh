@@ -23,7 +23,7 @@
 # 5) run this script. Tweak away!
 
 export ODL_IP='192.168.50.1'
-export ODL_PORT='8080'
+export ODL_PORT='8181'
 export ODL="http://${ODL_IP}:${ODL_PORT}/controller/nb/v2/neutron"
 export DEBUG=1
 # export DEBUG_FAKE_POST=yes
@@ -81,6 +81,33 @@ function do_eval_command {
 	echo "ERROR: $callerFunction $cmd unexpected rc $rc (wanted $expectedRc)"
 	exit 1
     fi
+}
+
+#--
+
+function wait_for_netvirt_ready {
+    url="http://${ODL_IP}:${ODL_PORT}/restconf/operational/network-topology:network-topology/topology/netvirt:1"
+    cmd="curl -X GET ${CURL_HEADERS[*]} $CURL_RETURN_FORMAT $url 2>&1"
+    max_retries=60
+    retries_interval=10
+    retries=0
+    wanted_rc='200'
+    [ $DEBUG -gt 0 ] && echo -n "checking netvirt flag ..."
+    while : ; do
+	if [ ${retries} -gt ${max_retries} ]; then
+	    [ $DEBUG -gt 0 ] && echo -n ' '
+	    echo "ERROR: $cmd failed ${retries} times every ${retries_interval} seconds"
+	    exit 1
+	fi
+	[ -z $DEBUG_FAKE_POST ] && rc=$(eval $cmd) || rc=${wanted_rc}
+	if [ "${rc}" == "${wanted_rc}" ]; then
+	    break
+	fi
+	[ $DEBUG -gt 0 ] && echo -n '.'
+	retries=$(( $retries + 1 ))
+	sleep ${retries_interval}
+    done
+    [ $DEBUG -gt 0 ] && echo ' done.'
 }
 
 #--
@@ -758,6 +785,7 @@ EOF
 
 if [ -z "" ]; then
     # setup_ovs
+    wait_for_netvirt_ready
     check_get_code networks/
     check_get_code networksbad/ 404
     create_ext_net ${TNT1_ID} ${EXT_NET1_ID} 
