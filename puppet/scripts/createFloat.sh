@@ -85,6 +85,36 @@ function do_eval_command {
 
 #--
 
+function wait_for_ovs_manager {
+    cmd='sudo ovs-vsctl list manager | grep -i 'state=ACTIVE' -q && echo "active" || echo "down"'
+    max_retries=100
+    retries_interval=3
+    retries=0
+    wanted_rc='active'
+    [ $DEBUG -gt 0 ] && echo -n "checking ovs manager connected ..."
+    while : ; do
+	if [ ${retries} -gt ${max_retries} ]; then
+	    [ $DEBUG -gt 0 ] && echo -n ' '
+	    echo "ERROR: $cmd failed ${retries} times every ${retries_interval} seconds"
+	    exit 1
+	fi
+	[ -z $DEBUG_FAKE_OVS ] && rc=$(eval $cmd) || rc=${wanted_rc}
+	if [ "${rc}" == "${wanted_rc}" ]; then
+	    break
+	fi
+	[ $DEBUG -gt 0 ] && echo -n '.'
+	retries=$(( $retries + 1 ))
+	sleep ${retries_interval}
+    done
+    [ $DEBUG -gt 0 ] && echo ' done.'
+    # wait for pipeline to be populated
+    if [ ${retries} -gt 0 ]; then
+	sleep 5
+    fi
+}
+
+#--
+
 function wait_for_netvirt_ready {
     url="http://${ODL_IP}:${ODL_PORT}/restconf/operational/network-topology:network-topology/topology/netvirt:1"
     cmd="curl -X GET ${CURL_HEADERS[*]} $CURL_RETURN_FORMAT $url 2>&1"
@@ -126,8 +156,6 @@ function setup_ovs {
     if [ -z $DEBUG_FAKE_OVS ]; then
 	[ $DEBUG -gt 0 ] && echo "setting ovs manager to tcp:${ODL_IP}:6640"
 	sudo ovs-vsctl set-manager tcp:${ODL_IP}:6640 || exit 2
-	# give it time for pipeline to be created...
-	sleep 10
     fi
 }
 
@@ -785,7 +813,9 @@ EOF
 
 if [ -z "" ]; then
     # setup_ovs
+    wait_for_ovs_manager
     wait_for_netvirt_ready
+
     check_get_code networks/
     check_get_code networksbad/ 404
     create_ext_net ${TNT1_ID} ${EXT_NET1_ID} 
