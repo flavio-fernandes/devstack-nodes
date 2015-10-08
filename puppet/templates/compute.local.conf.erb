@@ -1,4 +1,5 @@
 [[local|localrc]]
+#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 #enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
 enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl
 
@@ -20,8 +21,6 @@ VNCSERVER_PROXYCLIENT_ADDRESS=$HOST_IP
 VNCSERVER_LISTEN=0.0.0.0
 
 ODL_MODE=compute
-ODL_L3=True
-PUBLIC_INTERFACE=eth2
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ENABLE_TENANT_TUNNELS=True
 Q_ML2_TENANT_NETWORK_TYPE=vxlan
@@ -38,6 +37,10 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+# Uncomment lines below if odl-compute is to be used for l3 forwarding
+ODL_L3=True
+PUBLIC_INTERFACE=eth2
 
 BRANCH=stable/liberty
 GLANCE_BRANCH=$BRANCH
