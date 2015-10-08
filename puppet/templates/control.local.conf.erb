@@ -1,7 +1,7 @@
 [[local|localrc]]
+#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 #enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
-#enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl
 
 LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -49,7 +49,7 @@ SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
-BRANCH=stable/kilo
+BRANCH=stable/liberty
 GLANCE_BRANCH=$BRANCH
 HORIZON_BRANCH=$BRANCH
 KEYSTONE_BRANCH=$BRANCH
@@ -63,16 +63,11 @@ HEAT_BRANCH=$BRANCH
 TROVE_BRANCH=$BRANCH
 CEILOMETER_BRANCH=$BRANCH
 
-# Disable q-l3 and uncomment the lines below if ODL is being configured to perform l3fwd
+# Uncomment the lines below if ODL is being configured to perform l3fwd
 # For more info:  https://github.com/openstack/networking-odl/blob/master/devstack/README.rst
 # enable_service q-l3
-disable_service q-l3
-Q_L3_ENABLED=True
 ODL_L3=True
 PUBLIC_INTERFACE=eth2
-[[post-config|$NEUTRON_CONF]]
-[DEFAULT]
-service_plugins = networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin
 
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]

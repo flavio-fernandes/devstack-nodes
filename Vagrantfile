@@ -24,11 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Devstack Controller
   config.vm.define "devstack-control", primary: true do |control|
-    control.vm.box = "trusty64"
-    control.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
-    control.vm.provider "vmware_fusion" do |v, override|
-      override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_ubuntu-14.04_chef-provisionerless.box"
-    end
+    control.vm.box = "ubuntu/trusty64"
     control.vm.hostname = "devstack-control"
     control.vm.network "private_network", ip: "#{control_ip}"
     ## control.vm.network "forwarded_port", guest: 8080, host: 8081
@@ -58,11 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       compute_ip = compute_ips[n]
       compute_ex_ip = compute_ex_ips[n]
       compute_index = n+1
-      compute.vm.box = "trusty64"
-      compute.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box"
-      compute.vm.provider "vmware_fusion" do |v, override|
-        override.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/vmware/opscode_ubuntu-14.04_chef-provisionerless.box"
-      end
+      compute.vm.box = "ubuntu/trusty64"
       compute.vm.hostname = "devstack-compute-#{compute_index}"
       compute.vm.network "private_network", ip: "#{compute_ip}"
       compute.vm.network "private_network", ip: "#{compute_ex_ip}", virtualbox__intnet: "mylocalnet", auto_config: false

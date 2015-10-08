@@ -1,7 +1,7 @@
 [[local|localrc]]
+#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 #enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
-#enable_plugin networking-odl /vagrant/x/networking-odl.git plugin
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl
 
 LOGFILE=stack.sh.log
 LOG_COLOR=False
@@ -39,11 +39,10 @@ SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
 
 # Uncomment lines below if odl-compute is to be used for l3 forwarding
-Q_L3_ENABLED=True
 ODL_L3=True
 PUBLIC_INTERFACE=eth2
 
-BRANCH=stable/kilo
+BRANCH=stable/liberty
 GLANCE_BRANCH=$BRANCH
 HORIZON_BRANCH=$BRANCH
 KEYSTONE_BRANCH=$BRANCH
