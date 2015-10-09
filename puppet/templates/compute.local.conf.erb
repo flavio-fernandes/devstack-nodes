@@ -1,7 +1,7 @@
 [[local|localrc]]
-#enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl
+#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/liberty
+enable_plugin networking-odl https://github.com/openstack/networking-odl stable/liberty
 
 LOGFILE=stack.sh.log
 LOG_COLOR=False
@@ -42,17 +42,3 @@ ADMIN_PASSWORD=admin
 Q_L3_ENABLED=True
 ODL_L3=True
 PUBLIC_INTERFACE=eth2
-
-BRANCH=stable/liberty
-GLANCE_BRANCH=$BRANCH
-HORIZON_BRANCH=$BRANCH
-KEYSTONE_BRANCH=$BRANCH
-NOVA_BRANCH=$BRANCH
-NEUTRON_BRANCH=$BRANCH
-SWIFT_BRANCH=$BRANCH
-##CLIFF_BRANCH=$BRANCH
-##TEMPEST_BRANCH=$BRANCH
-CINDER_BRANCH=$BRANCH
-HEAT_BRANCH=$BRANCH
-TROVE_BRANCH=$BRANCH
-CEILOMETER_BRANCH=$BRANCH

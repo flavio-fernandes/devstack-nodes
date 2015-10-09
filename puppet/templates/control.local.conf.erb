@@ -1,7 +1,7 @@
 [[local|localrc]]
-#enable_plugin networking-odl https://github.com/openstack/networking-odl stable/kilo
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
-enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl
+#enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/liberty
+enable_plugin networking-odl https://github.com/openstack/networking-odl stable/liberty
 
 LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -53,20 +53,6 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
-
-BRANCH=stable/liberty
-GLANCE_BRANCH=$BRANCH
-HORIZON_BRANCH=$BRANCH
-KEYSTONE_BRANCH=$BRANCH
-NOVA_BRANCH=$BRANCH
-NEUTRON_BRANCH=$BRANCH
-SWIFT_BRANCH=$BRANCH
-##CLIFF_BRANCH=$BRANCH
-##TEMPEST_BRANCH=$BRANCH
-CINDER_BRANCH=$BRANCH
-HEAT_BRANCH=$BRANCH
-TROVE_BRANCH=$BRANCH
-CEILOMETER_BRANCH=$BRANCH
 
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]
