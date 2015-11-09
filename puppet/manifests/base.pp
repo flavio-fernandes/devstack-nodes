@@ -9,7 +9,10 @@ $deps = [
     'tcpdump',
     'wget',
     'tar',
+    'libxml2-dev',
+    'libxslt1-dev',
     'xbase-clients',
+    'emacs',
     'wireshark'
 ]
 
