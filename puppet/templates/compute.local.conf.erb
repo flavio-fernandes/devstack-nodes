@@ -1,7 +1,8 @@
 [[local|localrc]]
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/liberty
-enable_plugin networking-odl https://github.com/openstack/networking-odl stable/liberty
+#enable_plugin networking-odl https://github.com/openstack/networking-odl master
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl devel
 
 LOGFILE=stack.sh.log
 LOG_COLOR=False
@@ -40,4 +41,4 @@ ADMIN_PASSWORD=admin
 
 # Uncomment lines below if odl-compute is to be used for l3 forwarding
 ODL_L3=True
-PUBLIC_INTERFACE=eth2
+ODL_PROVIDER_MAPPINGS='br-ex:eth2'

@@ -3,7 +3,7 @@ vcsrepo {'/home/vagrant/devstack':
     provider => git,
     user     => 'vagrant',
     source   => 'https://github.com/openstack-dev/devstack.git',
-    revision => 'stable/liberty',
+    revision => 'master',
     before   => File['/home/vagrant/devstack/local.conf'],
 }
 
