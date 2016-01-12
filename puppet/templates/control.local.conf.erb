@@ -1,7 +1,8 @@
 [[local|localrc]]
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl lithiumkilo
 #enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl stable/liberty
-enable_plugin networking-odl https://github.com/openstack/networking-odl stable/liberty
+#enable_plugin networking-odl https://github.com/openstack/networking-odl master
+enable_plugin networking-odl https://github.com/flavio-fernandes/networking-odl devel
 
 LOGFILE=stack.sh.log
 SCREEN_LOGDIR=/opt/stack/data/log
@@ -34,11 +35,6 @@ ODL_MODE=externalodl
 ODL_MGR_IP=<%= @hosts['opendaylight']['ipaddress'] %>
 ODL_PORT=8080
 
-# Uncomment lines below if odl-compute is to be used for l3 forwarding
-Q_L3_ENABLED=True
-ODL_L3=True
-PUBLIC_INTERFACE=eth2
-
 VNCSERVER_PROXYCLIENT_ADDRESS=${HOST_IP}
 VNCSERVER_LISTEN=0.0.0.0
 
@@ -53,6 +49,12 @@ RABBIT_PASSWORD=rabbit
 SERVICE_TOKEN=service
 SERVICE_PASSWORD=admin
 ADMIN_PASSWORD=admin
+
+# Uncomment the lines below if ODL is being configured to perform l3fwd
+# For more info:  https://github.com/openstack/networking-odl/blob/master/devstack/README.rst
+# enable_service q-l3
+ODL_L3=True
+ODL_PROVIDER_MAPPINGS='br-ex:eth2'
 
 [[post-config|/etc/neutron/plugins/ml2/ml2_conf.ini]]
 [agent]

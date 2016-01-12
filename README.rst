@@ -14,6 +14,12 @@ To use these drivers with Devstack....
     [[local|localrc]]
     enable_plugin networking-odl https://github.com/openstack/networking-odl
 
+    ODL_MGR_IP=${ODL_IP}
+    ENABLE_TENANT_TUNNELS=True
+    Q_ML2_TENANT_NETWORK_TYPE=vxlan
+
+    ODL_MODE=allinone
+
 2) Start devstack::
 
     cd devstack
