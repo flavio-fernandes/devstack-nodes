@@ -26,6 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "devstack-control", primary: true do |control|
     control.vm.box = "ubuntu/trusty64"
     control.vm.hostname = "devstack-control"
+    ## control.vm.network "public_network", ip: "#{control_ip}", bridge: "tap1"
     control.vm.network "private_network", ip: "#{control_ip}"
     ## control.vm.network "forwarded_port", guest: 8080, host: 8081
     control.vm.network "private_network", ip: "#{neutron_ex_ip}", virtualbox__intnet: "mylocalnet", auto_config: false
@@ -56,6 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       compute_index = n+1
       compute.vm.box = "ubuntu/trusty64"
       compute.vm.hostname = "devstack-compute-#{compute_index}"
+      ## compute.vm.network "public_network", ip: "#{compute_ip}", bridge: "tap1"
       compute.vm.network "private_network", ip: "#{compute_ip}"
       compute.vm.network "private_network", ip: "#{compute_ex_ip}", virtualbox__intnet: "mylocalnet", auto_config: false
       compute.vm.provider :virtualbox do |vb|
